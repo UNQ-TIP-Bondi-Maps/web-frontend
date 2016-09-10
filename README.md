@@ -1,12 +1,36 @@
-# web-frontend
+# Bondi Maps - Web Frontend
+***
+### Equipo
 
-This project is generated with [yo angular generator](https://github.com/yeoman/generator-angular)
-version 0.15.1.
+* Luis Zagarella
+* Javier Toledo
 
-## Build & development
+### Configuración del entorno de desarrollo y preview
 
-Run `grunt` for building and `grunt serve` for preview.
+```sh
+$ git clone https://github.com/UNQ-TIP-Bondi-Maps/web-frontend.git
+$ cd web-frontend
+$ npm install && bower install
+$ grunt serve
+```
 
-## Testing
+### Backlog
 
-Running `grunt test` will run the unit tests with karma.
+* [Trello]
+
+### Backend
+
+* [Backend]
+
+### Android Frontend
+
+* [Android Frontend]
+
+***
+Proyecto generado con [Yeoman].
+
+[Trello]: <https://trello.com/b/u7NvAmGU/unq-tip-bondi-maps>
+[Backend]: <https://github.com/UNQ-TIP-Bondi-Maps/backend>
+[Android Frontend]: <https://github.com/UNQ-TIP-Bondi-Maps/android-frontend>
+[Android Studio]: <https://developer.android.com/studio/index.html>
+[Yeoman]: <http://yeoman.io/>
