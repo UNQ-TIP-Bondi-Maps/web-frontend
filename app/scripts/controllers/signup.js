@@ -8,10 +8,5 @@
  * Controller of the webFrontendApp
  */
 angular.module('webFrontendApp')
-  .controller('MainCtrl', function () {
-    this.awesomeThings = [
-      'HTML5 Boilerplate',
-      'AngularJS',
-      'Karma'
-    ];
-  });
+  .controller('SignupCtrl', ['$scope', function($scope) {
+  }]);
