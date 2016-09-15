@@ -16,7 +16,8 @@ var app = angular
     'ngRoute',
     'ngSanitize',
     'ngTouch',
-    'ui.router'
+    'ui.router',
+    'angular-storage'
   ]);
 
   app.config(function ($stateProvider, $urlRouterProvider) {
@@ -29,8 +30,13 @@ var app = angular
         templateUrl: 'views/signup.html',
         controller: 'SignupCtrl'
       })
-      .state('about', {
-        url: '/about',
-        templateUrl: 'views/about.html'
+      .state('login', {
+        url: '/login',
+        templateUrl: 'views/login.html'
+      })
+      .state('buses', {
+        url: '/buses',
+        templateUrl: 'views/buses.html',
+        controller: 'BusesCtrl'
       });
   });
