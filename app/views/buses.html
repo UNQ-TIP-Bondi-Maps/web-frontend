@@ -7,5 +7,15 @@
   		<input type="text" class="form-control" placeholder="Dirección del viaje" ng-model="bus.directionOfTravel">
   	</div>
   </div>
-  <button class="btn btn-default" ng-click="addBus()">Agregar colectivo</button>
+  <button class="btn btn-default" ng-click="addBus()" ng-if="createMode">Agregar colectivo</button>
+  <button class="btn btn-default" ng-click="changeToCreateMode()" ng-if="editMode">Cancelar</button>
+  <button class="btn btn-default" ng-click="updateBus()" ng-if="editMode">Guardar</button>
 </div>
+<ul class="list-group">
+	<div ng-repeat="bus in buses">
+		<li class="list-group-item">Interno: {{bus.internal}} | Dirección del viaje: {{bus.directionOfTravel}}
+			<button class="btn" ng-click="changeToEditMode(bus)">Editar</button>
+			<button class="btn" ng-click="deleteBus(bus)">Eliminar</button>
+		</li>
+	</div>
+</ul>

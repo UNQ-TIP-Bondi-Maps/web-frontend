@@ -2,7 +2,7 @@
 
 angular.module('webFrontendApp')
   .controller('SignupCtrl', ['$scope', '$http', '$location', 'store', function($scope, $http, $location, store) {
-  	$scope.companyManager = {nameAndSurname: '', phone: '', email: '', password: '', company: null};
+  	$scope.companyManager = {nameAndSurname: '', phone: '', email: '', password: '', company: {name: '', imageUrl: '', buses: []}};
   	$scope.createCompanyManager = function() {
   		$http.post('http://localhost:8080/backend/rest/companyManagers/create', $scope.companyManager)
   			.then(function successCallback(response) {
