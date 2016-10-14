@@ -1,0 +1,22 @@
+<div class="jumbotron">
+  <div class="col-sm-12">
+  	<div class="form-group">
+  		<input type="number" class="form-control" placeholder="Linea" ng-model="busLine.line">
+  	</div>
+  	<div class="form-group">
+  		<input type="text" class="form-control" placeholder="Url de una Imagen" ng-model="busLine.imageUrl">
+  	</div>
+  </div>
+  <button class="btn btn-default" ng-click="addBusLine()" ng-if="createMode">Agregar Linea</button>
+  <button class="btn btn-default" ng-click="changeToCreateMode()" ng-if="editMode">Cancelar</button>
+  <button class="btn btn-default" ng-click="updateBusLine()" ng-if="editMode">Guardar</button>
+</div>
+<ul class="list-group">
+	<div ng-repeat="busLine in busLines">
+		<li class="list-group-item">Linea: {{busLine.line}}
+      <button class="btn" ng-click="goToBuses(busLine.id)">Agregar Colectivo</button>
+			<button class="btn" ng-click="changeToEditMode(busLine)">Editar</button>
+			<button class="btn" ng-click="deleteBusLine(busLine)">Eliminar</button>
+		</li>
+	</div>
+</ul>

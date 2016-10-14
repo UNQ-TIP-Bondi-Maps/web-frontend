@@ -35,8 +35,13 @@ var app = angular
         templateUrl: 'views/login.html'
       })
       .state('buses', {
-        url: '/buses',
+        url: '/buses/:busLineID',
         templateUrl: 'views/buses.html',
         controller: 'BusesCtrl'
+      })
+      .state('busLine', {
+        url: '/busLines',
+        templateUrl: 'views/bus-line.html',
+        controller: 'BusLineCtrl'
       });
   });

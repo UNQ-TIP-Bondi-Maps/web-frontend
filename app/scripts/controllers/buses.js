@@ -1,14 +1,14 @@
 'use strict';
 
 angular.module('webFrontendApp')
-  .controller('BusesCtrl', ['$scope', '$http', '$location', 'store', function($scope, $http, $location, store) {
+  .controller('BusesCtrl', ['$scope', '$http', '$location', 'store', '$stateParams', function($scope, $http, $location, store, $stateParams) {
   	$scope.bus = {internal: '', directionOfTravel: '', position: null};
   	$scope.buses = [];
     $scope.createMode = true;
   	$scope.addBus = function() {
-  		$http.post('http://localhost:8080/backend/rest/companyManagers/' + store.get('id')  + '/addBus'  , $scope.bus)
+  		$http.post('http://localhost:8080/backend/rest/busLines/' + $stateParams.busLineID + '/addBus'  , $scope.bus)
   			.then(function successCallback(response) {
-          $http.get('http://localhost:8080/backend/rest/companyManagers/' + store.get('id') + '/buses')
+          $http.get('http://localhost:8080/backend/rest/busLines/' + $stateParams.busLineID + '/buses')
             .then(function successCallback(response) {
               $scope.buses = response.data;
               $scope.bus = {internal: '', directionOfTravel: '', position: null};
