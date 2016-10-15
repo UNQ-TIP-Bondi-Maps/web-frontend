@@ -33,7 +33,8 @@ var app = angular
       })
       .state('login', {
         url: '/login',
-        templateUrl: 'views/login.html'
+        templateUrl: 'views/login.html',
+        controller: 'LoginCtrl'
       })
       .state('buses', {
         url: '/buses/:busLineID',
