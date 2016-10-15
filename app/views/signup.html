@@ -1,23 +1,38 @@
-<div class="jumbotron">
+<form name="signupForm">
   <div class="col-sm-12">
   	<div class="form-group">
-  		<input type="text" class="form-control" placeholder="Nombre y Apellido" ng-model="companyManager.nameAndSurname">
+  		<input type="text" class="form-control" placeholder="Nombre y Apellido" ng-model="companyManager.nameAndSurname" required="">
   	</div>
   	<div class="form-group">
- 		<input type="text" class="form-control" placeholder="Email" ng-model="companyManager.email">
+ 		<input type="email" class="form-control" placeholder="Email" ng-model="companyManager.email" required>
   	</div> 
   	<div class="form-group">
-  		<input type="number" class="form-control" placeholder="Teléfono" ng-model="companyManager.phone">
+  		<input type="number" class="form-control" name="phone" placeholder="Teléfono" ng-model="companyManager.phone" required numeric-only>
   	</div>
+    <div class="form-group">      
+      <p class="text-danger" ng-if="signupForm.phone.$error.number">Número inválido.</p>       
+    </div> 
     <div class="form-group">
-      <input type="text" class="form-control" placeholder="Nombre de la empresa" ng-model="companyManager.company.name">
+      <input type="text" class="form-control" placeholder="Nombre de la empresa" ng-model="companyManager.company.name" required>
+    </div> 
+    <form name="userNameForm">
+      <div class="input-group">
+       	<input type="text" class="form-control" placeholder="Nombre de usuario" ng-model="companyManager.userName" required>
+        <span class="input-group-btn">
+          <button class="btn btn-default" type="button" ng-click="checkIfExistsUserName()" ng-disabled="userNameForm.$invalid">Comprobar disponibilidad</button>
+          <span class="spinner" us-spinner="{radius:5, width:2, length: 4}" spinner-key="checkUserName"></span>
+        </span>
+      </div>   
+    </form>
+    <div class="form-group">      
+      <p class="text-success" ng-if="notExistsUserName">Nombre de usuario disponible.</p>
+      <p class="text-danger" ng-if="existsUserName">Nombre de usuario no disponible.</p>       
+    </div>   
+    <div class="form-group">
+ 		  <input type="password" class="form-control" placeholder="Contraseña" ng-model="companyManager.password" required>
+  	</div> 
+    <div class="form-group">
+      <button class="btn btn-default" ng-click="createCompanyManager()" ng-disabled="signupForm.$invalid">Registrarse</button>
     </div>
-  	<div class="form-group">
- 		<input type="text" class="form-control" placeholder="Nombre de usuario" ng-model="companyManager.userName">
-  	</div> 
-  	<div class="form-group">
- 		<input type="text" class="form-control" placeholder="Contraseña" ng-model="companyManager.password">
-  	</div> 
   </div>
-  <button class="btn btn-default" ng-click="createCompanyManager()">Registrarse</button>
-</div>
+</form>

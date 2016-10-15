@@ -17,7 +17,8 @@ var app = angular
     'ngSanitize',
     'ngTouch',
     'ui.router',
-    'angular-storage'
+    'angular-storage',
+    'angularSpinner'
   ]);
 
   app.config(function ($stateProvider, $urlRouterProvider) {
