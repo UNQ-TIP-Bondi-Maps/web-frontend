@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('webFrontendApp')
-  .controller('SignupCtrl', ['$scope', '$http', '$location', 'store', 'usSpinnerService', function($scope, $http, $location, store, usSpinnerService) {
+  .controller('SignupCtrl', ['$scope', '$http', '$location', 'store', 'usSpinnerService', 'growl', function($scope, $http, $location, store, usSpinnerService, growl) {
   	$scope.startCeckIfExistsUserName = false;
     $scope.notExistsUserName = false;
     $scope.existsUserName = false;
@@ -9,6 +9,7 @@ angular.module('webFrontendApp')
   	$scope.createCompanyManager = function() {
   		$http.post('http://localhost:8080/backend/rest/companyManagers/create', $scope.companyManager)
   			.then(function successCallback(response) {
+          growl.success("Registrado correctamente.", {ttl: 5000});
   				store.set('id', response.data.id);
   				$location.path('/busLines');
   			}, function errorCallback(response) {
@@ -29,5 +30,9 @@ angular.module('webFrontendApp')
           $scope.existsUserName = true;
           console.log("server error: " + response.data);
         });
+    };
+
+    $scope.goToLogin = function() {
+      $location.path('/login');
     };
   }]);

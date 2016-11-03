@@ -18,7 +18,9 @@ var app = angular
     'ngTouch',
     'ui.router',
     'angular-storage',
-    'angularSpinner'
+    'angularSpinner',
+    'ngMaterial',
+    'angular-growl'
   ]);
 
   app.config(function ($stateProvider, $urlRouterProvider) {
@@ -45,5 +47,29 @@ var app = angular
         url: '/busLines',
         templateUrl: 'views/bus-line.html',
         controller: 'BusLineCtrl'
+      })
+      .state('dashboard', {
+        url: '/',
+        templateUrl: 'templates/dashboard.html'
+      })
+      .state('tables', {
+        url: '/tables',
+        templateUrl: 'templates/tables.html'
       });
+  });
+
+  app.directive('navbar', function() {
+    return {
+      restrict: 'E',
+      templateUrl: '../views/navbar.html',
+      controller: 'NavbarCtrl'
+    };
+  });
+
+  app.directive('sidenav', function() {
+    return {
+      restrict: 'E',
+      templateUrl: '../views/sidenav.html',
+      controller: 'SidenavCtrl'
+    };
   });

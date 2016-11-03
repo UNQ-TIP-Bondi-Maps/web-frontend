@@ -1,22 +1,42 @@
-<div class="jumbotron">
-  <div class="col-sm-12">
-  	<div class="form-group">
-  		<input type="number" class="form-control" placeholder="Linea" ng-model="busLine.line">
-  	</div>
-  	<div class="form-group">
-  		<input type="text" class="form-control" placeholder="Url de una Imagen" ng-model="busLine.imageUrl">
-  	</div>
+<h1>Mis Líneas</h1>
+<md-divider></md-divider>
+<!-- ADD LINE -->
+<md-input-container class="md-block" flex-gt-sm type="text">
+  <label>Línea</label>
+  <input type="text" ng-model="busLine.line" required="">
+</md-input-container> 
+<md-input-container class="md-block" flex-gt-sm type="text">
+  <label>Url de una Imagen</label>
+  <input type="text" ng-model="busLine.imageUrl" required="">
+</md-input-container> 
+
+<md-button class="md-primary md-raised" ng-click="addBusLine()" ng-if="createMode">Agregar Línea</md-button>
+<md-button class="md-primary md-raised" ng-click="updateBusLine()" ng-if="editMode">Guardar Cambios</md-button>
+
+<!-- NOTIFICATION -->
+<div growl></div>
+<br>
+<!-- LIST LINES -->
+<div layout="row" layout-align="center">
+  <div flex-gt-sm="50" flex>
+    <md-toolbar layout="row" class="md-hue-3">
+      <div class="md-toolbar-tools">
+        <span>Líneas</span>
+      </div>
+    </md-toolbar>
+    <md-content>
+      <md-subheader class="md-no-sticky">{{numberOfLinesCreated}} línea/s creada/s</md-subheader>
+      <md-list-item ng-repeat="busLine in busLines"  class="noright">
+        <p> Línea {{ busLine.line }}</p>
+        <md-button class="md-primary md-raised" ng-click="goToBuses(busLine)">Agregar Colectivo</md-button>
+        <md-button class="md-icon-button md-primary" aria-label="Settings"  ng-click="deleteBusLine(busLine)">
+          <i class="material-icons">delete</i>
+        </md-button>
+        <md-button class="md-icon-button md-primary" aria-label="Settings"  ng-click="changeToEditMode(busLine)">
+          <i class="material-icons">edit</i>
+        </md-button>
+        <md-divider></md-divider>
+      </md-list-item>
+    </md-content>
   </div>
-  <button class="btn btn-default" ng-click="addBusLine()" ng-if="createMode">Agregar Linea</button>
-  <button class="btn btn-default" ng-click="changeToCreateMode()" ng-if="editMode">Cancelar</button>
-  <button class="btn btn-default" ng-click="updateBusLine()" ng-if="editMode">Guardar</button>
 </div>
-<ul class="list-group">
-	<div ng-repeat="busLine in busLines">
-		<li class="list-group-item">Linea: {{busLine.line}}
-      <button class="btn" ng-click="goToBuses(busLine.id)">Agregar Colectivo</button>
-			<button class="btn" ng-click="changeToEditMode(busLine)">Editar</button>
-			<button class="btn" ng-click="deleteBusLine(busLine)">Eliminar</button>
-		</li>
-	</div>
-</ul>

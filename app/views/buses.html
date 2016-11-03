@@ -1,22 +1,45 @@
-<div class="jumbotron">
-  <div class="col-sm-12">
-  	<div class="form-group">
-  		<input type="number" class="form-control" placeholder="Interno" ng-model="bus.internal">
-  	</div>
-  	<div class="form-group">
-  		<input type="text" class="form-control" placeholder="Dirección del viaje" ng-model="bus.directionOfTravel">
-  	</div>
+<h1>Mis Colectivos</h1>
+<md-divider></md-divider>
+<br>
+<span>Agregar Colectivos a la Línea {{busLine.line}}</span>
+
+<!-- ADD LINE -->
+<md-input-container class="md-block" flex-gt-sm type="number">
+  <label>Interno</label>
+  <input type="number" ng-model="bus.internal" required="">
+</md-input-container> 
+<md-input-container class="md-block" flex-gt-sm type="text">
+  <label>Dirección del viaje</label>
+  <input type="text" ng-model="bus.directionOfTravel" required="">
+</md-input-container> 
+
+<md-button class="md-primary md-raised" ng-click="addBus()" ng-if="createMode">Agregar colectivo</md-button> 
+<md-button class="md-primary md-raised" ng-click="updateBus()" ng-if="editMode">Guardar Cambios</md-button>
+   
+
+<!-- NOTIFICATION -->
+<div growl></div>
+<br>
+
+<!-- LIST BUSES -->
+<div layout="row" layout-align="center">
+  <div flex-gt-sm="50" flex>
+    <md-toolbar layout="row" class="md-hue-3">
+      <div class="md-toolbar-tools">
+        <span>Colectivos</span>
+      </div>
+    </md-toolbar>
+    <md-content>
+      <md-subheader class="md-no-sticky">{{numberOfBusesCreated}} colectivo/s agregado/s en la Línea {{busLine.line}}</md-subheader>
+      <md-list-item ng-repeat="bus in buses"  class="noright">
+        <p> Interno: {{ bus.internal }}</p>
+        <md-button class="md-icon-button md-primary" aria-label="Settings"  ng-click="deleteBus(bus)">
+          <i class="material-icons">delete</i>
+        </md-button>
+        <md-button class="md-icon-button md-primary" aria-label="Settings"  ng-click="changeToEditMode(bus)">
+          <i class="material-icons">edit</i>
+        </md-button>
+      </md-list-item>
+    </md-content>
   </div>
-  <button class="btn btn-default" ng-click="addBus()" ng-if="createMode">Agregar colectivo</button>
-  <button class="btn btn-default" ng-click="changeToCreateMode()" ng-if="editMode">Cancelar</button>
-  <button class="btn btn-default" ng-click="updateBus()" ng-if="editMode">Guardar</button>
 </div>
-<ul class="list-group">
-	<div ng-repeat="bus in buses">
-		<li class="list-group-item">Interno: {{bus.internal}} | Dirección del viaje: {{bus.directionOfTravel}}
-			<button class="btn" ng-click="changeToEditMode(bus)">Editar</button>
-			<button class="btn" ng-click="deleteBus(bus)">Eliminar</button>
-		</li>
-	</div>
-</ul>
-<a class="btn" href="/#/busLines">Volver</a>
