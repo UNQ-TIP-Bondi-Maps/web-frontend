@@ -8,68 +8,57 @@
  *
  * Main module of the application.
  */
-var app = angular
-  .module('webFrontendApp', [
-    'ngAnimate',
-    'ngCookies',
-    'ngResource',
-    'ngRoute',
-    'ngSanitize',
-    'ngTouch',
-    'ui.router',
-    'angular-storage',
-    'angularSpinner',
-    'ngMaterial',
-    'angular-growl'
-  ]);
+ var app = angular.module('webFrontendApp', ['angular-growl', 'angular-storage', 'ui.bootstrap', 'ui.router', 'ngCookies', 'ngAnimate', 'ngResource', 'ngSanitize', 'ngTouch']);
 
-  app.config(function ($stateProvider, $urlRouterProvider) {
+  app.config(function ($stateProvider, $urlRouterProvider) { 
+    // For unmatched routes
+    $urlRouterProvider.otherwise('/');
 
-    $urlRouterProvider.otherwise('/home');
-
+    // Application routes
     $stateProvider
-      .state('home', {
-        url: '/home',
-        templateUrl: 'views/signup.html',
-        controller: 'SignupCtrl'
-      })
-      .state('login', {
-        url: '/login',
-        templateUrl: 'views/login.html',
-        controller: 'LoginCtrl'
-      })
-      .state('buses', {
-        url: '/buses/:busLineID',
-        templateUrl: 'views/buses.html',
-        controller: 'BusesCtrl'
-      })
-      .state('busLine', {
-        url: '/busLines',
-        templateUrl: 'views/bus-line.html',
-        controller: 'BusLineCtrl'
-      })
-      .state('dashboard', {
-        url: '/',
-        templateUrl: 'templates/dashboard.html'
-      })
-      .state('tables', {
-        url: '/tables',
-        templateUrl: 'templates/tables.html'
-      });
+        .state('index', {
+            url: '/',
+            templateUrl: 'views/signup.html',
+            controller: 'SignupCtrl'
+        })
+        .state('login', {
+            url: '/login',
+            templateUrl: 'views/login.html',
+            controller: 'LoginCtrl'
+        })
+        .state('dashboard', {
+            url: '/dashboard',
+            templateUrl: 'views/templates/dashboard.html'
+        })
+        .state('lines', {
+            url: '/lines',
+            templateUrl: 'views/lines.html',
+            controller: 'LinesCtrl'
+        })
+        .state('buses', {
+            url: '/buses/:busLineID',
+            templateUrl: 'views/buses.html',
+            controller: 'BusesCtrl'
+        })
+        .state('tables', {
+            url: '/tables',
+            templateUrl: 'views/templates/tables.html'
+        });
   });
 
-  app.directive('navbar', function() {
-    return {
-      restrict: 'E',
-      templateUrl: '../views/navbar.html',
-      controller: 'NavbarCtrl'
-    };
-  });
-
-  app.directive('sidenav', function() {
-    return {
-      restrict: 'E',
-      templateUrl: '../views/sidenav.html',
-      controller: 'SidenavCtrl'
-    };
-  });
+app.directive('navbar', function() { 
+  return { 
+    restrict: 'E', 
+    templateUrl: '../views/templates/navbar.html',
+    controller: 'NavbarCtrl'
+  }; 
+}); 
+ 
+ 
+app.directive('sidebar', function() { 
+  return { 
+    restrict: 'E', 
+    templateUrl: '../views/templates/sidebar.html', 
+    controller: 'MasterCtrl' 
+  }; 
+}); 

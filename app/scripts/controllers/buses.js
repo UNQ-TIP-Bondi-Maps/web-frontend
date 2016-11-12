@@ -5,11 +5,12 @@ angular.module('webFrontendApp')
   	$scope.bus = {internal: '', directionOfTravel: '', position: null};
   	$scope.buses = [];
     $scope.createMode = true;
+    console.log($stateParams.busLineID);
     $http.get('http://localhost:8080/backend/rest/busLines/' + $stateParams.busLineID)
     .then(function successCallback(response) {
       $scope.busLine = response.data;
     }, function errorCallback(response) {
-      console.log("server error: " + response.dataq);
+      console.log("server error: " + response.data);
     });
 
     updateBusesList();
@@ -17,7 +18,7 @@ angular.module('webFrontendApp')
   	$scope.addBus = function() {
   		$http.post('http://localhost:8080/backend/rest/busLines/' + $stateParams.busLineID + '/addBus'  , $scope.bus)
   			.then(function successCallback(response) {
-          growl.success("Colectivo agregado correctamente a la Línea " + $scope.busLine.line, {ttl: 5000});
+         //growl.success("Colectivo agregado correctamente a la Línea " + $scope.busLine.line, {ttl: 5000});
           updateBusesList();
   			}, function errorCallback(response) {
   				console.log("server error: " + response.data);
@@ -27,7 +28,7 @@ angular.module('webFrontendApp')
     $scope.deleteBus = function(bus) {
       $http.delete('http://localhost:8080/backend/rest/buses/delete/' +  bus.id)
         .then(function() {
-          growl.success("Colectivo eliminado correctamente de la Línea " + $scope.busLine.line, {ttl: 5000});
+          //growl.success("Colectivo eliminado correctamente de la Línea " + $scope.busLine.line, {ttl: 5000});
           $scope.removeBus(bus);
         });
     };
@@ -35,7 +36,7 @@ angular.module('webFrontendApp')
     $scope.updateBus = function() {
       $http.put('http://localhost:8080/backend/rest/buses/update', $scope.bus)
         .then(function() {
-          growl.success("Colectivo de la Línea " + $scope.busLine.line + " actualizado correctamente", {ttl: 5000});
+          //growl.success("Colectivo de la Línea " + $scope.busLine.line + " actualizado correctamente", {ttl: 5000});
           $scope.changeToCreateMode();
           updateBusesList();
         });

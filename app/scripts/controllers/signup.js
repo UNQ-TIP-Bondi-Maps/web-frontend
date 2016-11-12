@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('webFrontendApp')
-  .controller('SignupCtrl', ['$scope', '$http', '$location', 'store', 'usSpinnerService', 'growl', function($scope, $http, $location, store, usSpinnerService, growl) {
+  .controller('SignupCtrl', ['$scope', '$http', '$location', 'store', 'growl', function($scope, $http, $location, store, growl) {
   	$scope.startCeckIfExistsUserName = false;
     $scope.notExistsUserName = false;
     $scope.existsUserName = false;
@@ -9,9 +9,8 @@ angular.module('webFrontendApp')
   	$scope.createCompanyManager = function() {
   		$http.post('http://localhost:8080/backend/rest/companyManagers/create', $scope.companyManager)
   			.then(function successCallback(response) {
-          growl.success("Registrado correctamente.", {ttl: 5000});
   				store.set('id', response.data.id);
-  				$location.path('/busLines');
+  				$location.path('/dashboard');
   			}, function errorCallback(response) {
   				console.log("server error: " + response.data);
   			});
@@ -20,10 +19,8 @@ angular.module('webFrontendApp')
       $scope.notExistsUserName = false;
       $scope.existsUserName = false;
       $scope.startCeckIfExistsUserName = true;
-      usSpinnerService.spin('checkUserName');
       $http.get('http://localhost:8080/backend/rest/companyManagers/existsUserName/' + $scope.companyManager.userName)
         .then(function successCallback(response) {
-          usSpinnerService.stop('checkUserName');
           $scope.notExistsUserName = !response.data;
           $scope.existsUserName = response.data;
         }, function errorCallback(response) {

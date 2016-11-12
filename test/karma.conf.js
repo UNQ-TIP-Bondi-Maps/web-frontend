@@ -1,5 +1,5 @@
 // Karma configuration
-// Generated on 2016-09-09
+// Generated on 2016-11-12
 
 module.exports = function(config) {
   'use strict';
@@ -22,24 +22,17 @@ module.exports = function(config) {
       // bower:js
       'bower_components/jquery/dist/jquery.js',
       'bower_components/angular/angular.js',
+      'bower_components/angular-cookies/angular-cookies.js',
+      'bower_components/angular-bootstrap/ui-bootstrap-tpls.js',
+      'bower_components/angular-ui-router/release/angular-ui-router.js',
       'bower_components/bootstrap/dist/js/bootstrap.js',
       'bower_components/angular-animate/angular-animate.js',
-      'bower_components/angular-cookies/angular-cookies.js',
       'bower_components/angular-resource/angular-resource.js',
       'bower_components/angular-route/angular-route.js',
       'bower_components/angular-sanitize/angular-sanitize.js',
       'bower_components/angular-touch/angular-touch.js',
+      'bower_components/angular-growl/build/angular-growl.js',
       'bower_components/a0-angular-storage/dist/angular-storage.js',
-      'bower_components/spin.js/spin.js',
-      'bower_components/angular-spinner/angular-spinner.js',
-      'bower_components/bootstrap-sass/assets/javascripts/bootstrap.js',
-      'bower_components/bootstrap-material-design/dist/js/material.js',
-      'bower_components/bootstrap-material-design/dist/js/ripples.js',
-      'bower_components/angular-messages/angular-messages.js',
-      'bower_components/angular-bootstrap-material/dist/angular-bootstrap-material.js',
-      'bower_components/angular-aria/angular-aria.js',
-      'bower_components/angular-material/angular-material.js',
-      'bower_components/angular-growl-v2/build/angular-growl.js',
       'bower_components/angular-mocks/angular-mocks.js',
       // endbower
       'app/scripts/**/*.js',

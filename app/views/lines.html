@@ -1,52 +1,57 @@
-<h1 class="text-muted">Agregar Colectivos a la Línea {{busLine.line}}</h1>
+<h1 class="text-muted">Agregar una Línea de Colectivo</h1>
 <hr></hr>
 <div class="row">
   <div class="col-lg-6">
     
     <div class="form-group">
-      <label for="name" class="cols-sm-2 control-label">Interno</label>
+      <label for="name" class="cols-sm-2 control-label">Línea</label>
       <div class="cols-sm-10">
         <div class="input-group">
           <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
-          <input type="number" class="form-control" name="name" id="name" ng-model="bus.internal"/>
+          <input type="number" class="form-control" name="name" id="name" ng-model="busLine.line"/>
         </div>
       </div>
     </div>
 
     <div class="form-group">
-      <label for="name" class="cols-sm-2 control-label">Dirección del viaje</label>
+      <label for="name" class="cols-sm-2 control-label">Url de una Imagen</label>
       <div class="cols-sm-10">
         <div class="input-group">
           <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
-          <input type="text" class="form-control" name="name" id="name" ng-model="bus.directionOfTravel"/>
+          <input type="text" class="form-control" name="name" id="name" ng-model="busLine.imageUrl"/>
         </div>
       </div>
     </div>
 
     <div class="form-group ">
-      <button type="button" class="btn btn-primary btn-lg btn-block login-button" ng-click="addBus()" ng-if="createMode">Agregar Colectivo</button>
+      <button type="button" class="btn btn-primary btn-lg btn-block login-button" ng-click="addBusLine()" ng-if="createMode">Agregar Línea</button>
     </div>
 
     <div class="form-group ">
-      <button type="button" class="btn btn-primary btn-lg btn-block login-button" ng-click="updateBus()" ng-if="editMode">Guardar Cambios</button>
+      <button type="button" class="btn btn-primary btn-lg btn-block login-button" ng-click="updateBusLine()" ng-if="editMode">Guardar Cambios</button>
     </div>
 
     <rd-widget>
-      <rd-widget-header icon="fa-tasks" title="Colectivos"></rd-widget-header>
+      <rd-widget-header icon="fa-tasks" title="Líneas"></rd-widget-header>
       <rd-widget-body classes="medium no-padding">
         <div class="table-responsive">
           <table class="table">
-            <tbody ng-repeat="bus in buses">
+            <tbody ng-repeat="busLine in busLines">
               <tr>
-                <td>Interno: {{bus.internal}}</td>
+                <td>Línea: {{busLine.line}}</td>
                 <td>
-                  <a ng-click="deleteBus(bus)" href="">
+                  <a ng-click="deleteBusLine(busLine)" href="">
                     <span class="glyphicon glyphicon-trash"></span>
                   </a>
                 </td>
                 <td>
-                  <a href="" ng-click="changeToEditMode(bus)">
+                  <a href="" ng-click="changeToEditMode(busLine)">
                     <span class="glyphicon glyphicon-edit"></span>
+                  </a>
+                </td>
+                <td>
+                  <a href="" ng-click="goToBuses(busLine)">
+                    Agregar Colectivo
                   </a>
                 </td>
               </tr>

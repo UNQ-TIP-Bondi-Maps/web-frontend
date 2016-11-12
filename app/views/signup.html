@@ -1,61 +1,83 @@
-<md-button ng-click="goToLogin()">Ingresar</md-button>
-<div layout="row" layout-align="center">
-<md-card class="md-card-signup">
-<md-toolbar class="md-table-toolbar md-default toolbar-register">
-  <div class="md-toolbar-tools" layout="row" layout-align="center">
-    <span>Registrarse</span>
-  </div>
-</md-toolbar>
-<md-container>
+<div class="container">
+	<div class="row main">
+		<div class="panel-heading">
+           <div class="panel-title text-center">
+           		<h1 class="title">Registrarse en Bondi Maps</h1>
+           		<hr />
+           	</div>
+        </div> 
+		<div class="main-login main-center">
+			<form class="form-horizontal" method="post" action="#">
+				
+				<div class="form-group">
+					<label for="name" class="cols-sm-2 control-label">Nombre y Apellido</label>
+					<div class="cols-sm-10">
+						<div class="input-group">
+							<span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+							<input type="text" class="form-control" name="name" id="name" ng-model="companyManager.nameAndSurname" required/>
+						</div>
+					</div>
+				</div>
 
-  		<md-input-container class="md-block" flex-gt-sm>
-        <label>Nombre y Apellido</label>
-        <input type="text" ng-model="companyManager.nameAndSurname" required="">
-      </md-input-container>
+				<div class="form-group">
+					<label for="email" class="cols-sm-2 control-label">Email</label>
+					<div class="cols-sm-10">
+						<div class="input-group">
+							<span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
+							<input type="text" class="form-control" name="email" id="email" ng-model="companyManager.email" required/>
+						</div>
+					</div>
+				</div>
 
-  	
- 		  <md-input-container class="md-block" flex-gt-sm type="email">
-        <label>Email</label>
-        <input type="email" ng-model="companyManager.email" required="">
-      </md-input-container>
-  	
-      <md-input-container class="md-block" flex-gt-sm type="number">
-        <label>Teléfono</label>
-        <input type="number" ng-model="companyManager.phone" required="">
-      </md-input-container>
-  	     
-      <p class="text-danger" ng-if="signupForm.phone.$error.number">Número inválido.</p>       
-    
-      <md-input-container class="md-block" flex-gt-sm type="text">
-        <label>Nombre de la empresa</label>
-        <input type="text" ng-model="companyManager.company.name" required="">
-      </md-input-container>
+				<div class="form-group">
+					<label for="phone" class="cols-sm-2 control-label">Teléfono</label>
+					<div class="cols-sm-10">
+						<div class="input-group">
+							<span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
+							<input type="number" class="form-control" name="phone" id="phone" ng-model="companyManager.phone" required/>
+						</div>
+					</div>
+				</div>
 
-      <form layout layout-align="center" layout-padding>
-          <div layout="row" flex>
-              <md-input-container class="md-block" flex-gt-sm type="text">
-                <label>Nombre de usuario</label>
-                <input type="text" ng-model="companyManager.userName" required="">
-              </md-input-container>
-              <div>
-                  <md-button class="register md-primary md-raised" ng-click="checkIfExistsUserName()">Comprobar disponibilidad</md-button>  
-              </div>
-          </div>  
-      </form>
+				<div class="form-group">
+					<label for="name" class="cols-sm-2 control-label">Nombre de la Empresa</label>
+					<div class="cols-sm-10">
+						<div class="input-group">
+							<span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+							<input type="text" class="form-control" name="name" id="companyName" ng-model="companyManager.company.name" required/>
+						</div>
+					</div>
+				</div>
 
-      <md-input-container class="md-block" flex-gt-sm type="password">
-        <label>Contraseña</label>
-        <input type="password" ng-model="companyManager.password" required="">
-      </md-input-container> 	
-      
-      <md-fab-toolbar md-direction="left">
-        <md-fab-trigger>
-          <md-button class="register md-primary md-raised" ng-click="createCompanyManager()">Registrarse</md-button>
-        </md-fab-trigger>
-      </md-fab-toolbar>
-   
-  </md-container>
- </md-card>
+				<div class="form-group">
+					<label for="username" class="cols-sm-2 control-label">Nombre de Usuario</label>
+					<div class="cols-sm-10">
+						<div class="input-group">
+							<span class="input-group-addon"><i class="fa fa-users fa" aria-hidden="true"></i></span>
+							<input type="text" class="form-control" name="username" id="username" ng-model="companyManager.userName" required/>
+						</div>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label for="password" class="cols-sm-2 control-label">Contraseña</label>
+					<div class="cols-sm-10">
+						<div class="input-group">
+							<span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
+							<input type="password" class="form-control" name="password" id="password" ng-model="companyManager.password" required/>
+						</div>
+					</div>
+				</div>
+
+				<div class="form-group ">
+					<button type="button" class="btn btn-primary btn-lg btn-block login-button" ng-click="createCompanyManager()">Registrarse</button>
+				</div>
+				<div class="login-register">
+		            <a href="#/login">Ingresar</a>
+		         </div>
+			</form>
+		</div>
+	</div>
 </div>
- <!-- NOTIFICATIONS -->
- <div growl></div>
+<!-- NOTIFICATIONS --> 
+<div growl></div> 
