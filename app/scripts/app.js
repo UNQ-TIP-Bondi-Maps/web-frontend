@@ -8,7 +8,7 @@
  *
  * Main module of the application.
  */
- var app = angular.module('webFrontendApp', ['angular-growl', 'angular-storage', 'ui.bootstrap', 'ui.router', 'ngCookies', 'ngAnimate', 'ngResource', 'ngSanitize', 'ngTouch']);
+ var app = angular.module('webFrontendApp', ['angular-growl', 'angular-storage', 'ui.bootstrap', 'ui.router', 'ngCookies', 'ngAnimate', 'ngResource', 'ngSanitize', 'ngTouch', 'ngMap']);
 
   app.config(function ($stateProvider, $urlRouterProvider) { 
     // For unmatched routes
@@ -39,6 +39,11 @@
             url: '/buses/:busLineID',
             templateUrl: 'views/buses.html',
             controller: 'BusesCtrl'
+        })
+        .state('monitoring-buses', {
+            url: '/monitoring-buses',
+            templateUrl: 'views/monitoring-buses.html',
+            controller: 'MonitoringBusesCtrl'
         })
         .state('tables', {
             url: '/tables',

@@ -33,6 +33,7 @@ module.exports = function(config) {
       'bower_components/angular-touch/angular-touch.js',
       'bower_components/angular-growl/build/angular-growl.js',
       'bower_components/a0-angular-storage/dist/angular-storage.js',
+      'bower_components/ngmap/build/scripts/ng-map.js',
       'bower_components/angular-mocks/angular-mocks.js',
       // endbower
       'app/scripts/**/*.js',
