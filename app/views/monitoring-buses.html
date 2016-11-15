@@ -1,23 +1,19 @@
 <h1 class="text-muted">Monitoreo de Colectivos</h1>
 <hr></hr>
-<div class="container">
-	<div class="row main">
-		<div class="panel">
-			<div map-lazy-load="https://maps.google.com/maps/api/js">
-				<ng-map center="current-position" zoom="15">
-					<marker ng-repeat="p in coordinates"
-					    position="{{p.pos}}"
-					    data="{{data[$index]}}"
-					    title="pos: {{p.pos}}"
-					    icon="{
-					        url:'../images/ic_bus.png',
-					        scaledSize:[50,50],
-					        origin: [10,10],
-					        anchor: [50,50]
-					      }">					  
-					</marker>
-				</ng-map>
-			</div>
-		</div>
-	</div>
+<div map-lazy-load="https://maps.google.com/maps/api/js">
+	<ng-map zoom-to-include-markers="true">
+		<marker ng-repeat="p in coordinates"
+		    position="{{p.pos}}"
+		    data="{{data[$index]}}"
+		    title="pos: {{p.pos}}"
+		    icon="{
+		        url:'../images/ic_bus.png',
+		        scaledSize:[50,50],
+		        origin: [10,10],
+		        anchor: [50,50]
+		      }"
+		      default-style="false"
+		      >					  
+		</marker>
+	</ng-map>
 </div>
