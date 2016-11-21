@@ -36,7 +36,7 @@
       <rd-widget-body classes="medium no-padding">
         <div class="table-responsive">
           <table class="table">
-            <tbody ng-repeat="busLine in busLines">
+            <tbody dir-paginate="busLine in busLines|itemsPerPage:1" pagination-id="lines">
               <tr>
                 <td>Línea: {{busLine.line}}</td>
                 <td>
@@ -60,15 +60,13 @@
         </div>      
       </rd-widget-body>
       <rd-widget-footer>
-        <ul class="pagination pagination-sm pull-right">
-          <li><a href="#">&laquo;</a></li>
-          <li><a href="#">1</a></li>
-          <li><a href="#">2</a></li>
-          <li><a href="#">3</a></li>
-          <li><a href="#">4</a></li>
-          <li><a href="#">5</a></li>
-          <li><a href="#">&raquo;</a></li>
-        </ul>
+        <div class="text-center">
+          <dir-pagination-controls
+            pagination-id="lines"
+            direction-links="true"
+            boundary-links="true" >
+          </dir-pagination-controls>
+        </div>
         <div class="clearfix"></div>
       </rd-widget-footer>
     </rd-widget>

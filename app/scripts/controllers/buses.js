@@ -5,7 +5,6 @@ angular.module('webFrontendApp')
   	$scope.bus = {internal: '', directionOfTravel: '', position: null};
   	$scope.buses = [];
     $scope.createMode = true;
-    console.log($stateParams.busLineID);
     $http.get('http://localhost:8080/backend/rest/busLines/' + $stateParams.busLineID)
     .then(function successCallback(response) {
       $scope.busLine = response.data;
@@ -72,4 +71,19 @@ angular.module('webFrontendApp')
         console.log("server error: " + response.dataq);
       });
     };
+
+    $scope.selection = [];
+    $scope.busesSelected = false;
+    // helper method to get selected bus
+    $scope.selectedBuses = function selectedBuses() {
+      return filterFilter($scope.buses, { selected: true });
+    };
+
+    // watch buses for changes
+    $scope.$watch('buses|filter:{selected:true}', function (nv) {
+      $scope.selection = nv.map(function (bus) {
+        return bus;
+      });
+      ($scope.selection.length > 0) ? $scope.busesSelected = true : $scope.busesSelected = false;
+    }, true);
   }]);

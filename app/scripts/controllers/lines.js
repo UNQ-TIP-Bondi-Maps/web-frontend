@@ -72,11 +72,9 @@ angular.module('webFrontendApp')
     function updateBusLinesList() {
       $http.get('http://localhost:8080/backend/rest/companyManagers/' + store.get('id') + '/busLines')
         .then(function successCallback(response) {
-          console.log("aca");
           $scope.busLines = response.data;
           $scope.busLine = {line: null, imageUrl: ''};
           $scope.numberOfLinesCreated = $scope.busLines.length;
-          console.log($scope.busLines);
         }, function errorCallback(response) {
           console.log("server error: " + response.dataq);
       });
