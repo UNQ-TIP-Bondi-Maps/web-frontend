@@ -36,6 +36,7 @@ module.exports = function(config) {
       'bower_components/ngmap/build/scripts/ng-map.js',
       'bower_components/angular-screenfull/dist/angular-screenfull.js',
       'bower_components/angularUtils-pagination/dirPagination.js',
+      'bower_components/angular-bootstrap-multiselect/angular-bootstrap-multiselect.js',
       'bower_components/angular-mocks/angular-mocks.js',
       // endbower
       'app/scripts/**/*.js',

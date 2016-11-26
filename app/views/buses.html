@@ -1,30 +1,31 @@
 <h1 class="text-muted">Agregar Colectivos a la Línea {{busLine.line}}</h1>
+<h4 class="text-muted">Luego de agregar los colectivos, deberá establecer sus recorridos.<br> Para ello, seleccione a los colectivos que desee agregarle su recorrido y presione "Crear Recorrido".</h4>
 <hr></hr>
 <div class="row">
   <div class="col-lg-6">
-    
-    <div class="form-group">
-      <label for="name" class="cols-sm-2 control-label">Interno</label>
-      <div class="cols-sm-10">
-        <div class="input-group">
-          <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
-          <input type="number" class="form-control" name="name" id="name" ng-model="bus.internal"/>
+    <form name="addBusForm">
+      <div class="form-group">
+        <label for="name" class="cols-sm-2 control-label">Interno</label>
+        <div class="cols-sm-10">
+          <div class="input-group">
+            <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+            <input type="number" class="form-control" name="name" id="name" ng-model="bus.internal" required/>
+          </div>
         </div>
       </div>
-    </div>
 
-    <div class="form-group">
-      <label for="name" class="cols-sm-2 control-label">Dirección del viaje</label>
-      <div class="cols-sm-10">
-        <div class="input-group">
-          <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
-          <input type="text" class="form-control" name="name" id="name" ng-model="bus.directionOfTravel"/>
+      <div class="form-group">
+        <label for="name" class="cols-sm-2 control-label">Dirección del viaje</label>
+        <div class="cols-sm-10">
+          <div class="input-group">
+            <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+            <input type="text" class="form-control" name="name" id="name" ng-model="bus.directionOfTravel" required/>
+          </div>
         </div>
       </div>
-    </div>
-
+    </form>
     <div class="form-group ">
-      <button type="button" class="btn btn-primary btn-lg btn-block login-button" ng-click="addBus()" ng-if="createMode">Agregar Colectivo</button>
+      <button type="button" class="btn btn-primary btn-lg btn-block login-button" ng-click="addBus()" ng-if="createMode" ng-disabled="addBusForm.$invalid">Agregar Colectivo</button>
     </div>
 
     <div class="form-group ">
@@ -32,7 +33,11 @@
     </div>
 
     <rd-widget>
-      <rd-widget-header icon="fa-tasks" title="Colectivos"></rd-widget-header>
+      <rd-widget-header icon="fa-tasks" title="Colectivos">
+        <div class="right-align">
+          <label><input type="checkbox" id="allSelected" name="allSelected" ng-model="allSelected" data-ng-change="allSelected? selectAllBuses() : deselectAllBuses()"> Seleccionar Todos</label>
+        </div>
+      </rd-widget-header>
       <rd-widget-body classes="medium no-padding">
         <div class="table-responsive">
           <table class="table">
@@ -69,7 +74,100 @@
       </rd-widget-footer>
     </rd-widget>
   </div>
-</div>
-<div class="form-group ">
-      <button type="button" class="btn btn-primary btn-lg btn-block login-button" ng-if="busesSelected">Agregar Punto de Partida</button>
+  <div class="col-xs-6 col-md-4">
+    <div class="form-group ">
+      <div class="thumbnail">
+        <h4 class="text-muted">Crear el recorrido de ida para los coletivos seleccionados</h4>
+        <button type="button" class="btn btn-primary btn-lg btn-block login-button" data-toggle="modal" data-target="#myModal" ng-disabled="!busesSelected" title="{{(notBusesSelected()?'Seleccione uno o más colectivos para crear el recorrido.' : '')}}" required>Crear</button>
+      </div>
     </div>
+    <div class="form-group ">
+      <div class="thumbnail">
+        <h4 class="text-muted">Crear el recorrido de vuelta para los coletivos seleccionados</h4>
+        <button type="button" class="btn btn-primary btn-lg btn-block login-button" data-toggle="modal" data-target="#modalRouteBack" ng-disabled="!busesSelected || !routeWaySaved" title="{{(notBusesSelected()?'Seleccione uno o más colectivos para crear el recorrido.' : '')}}">Crear</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL ROUTE WAY-->
+<div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Crear Recorrido de ida</h4>
+      </div>
+      <div class="modal-body">
+        <!-- PLACE AUTOCOMPLETE -->
+        <h4>Ingresar la dirección de origen</h4>
+        <input type="text" class="form-control" places-auto-complete size=80 ng-model="originAddress"/>
+        <h4>Ingresar la dirección de destino</h4>
+        <input type="text" class="form-control" places-auto-complete size=80 ng-model="destination"/>
+        <!-- MAP -->
+        <ng-map id="addBus" center="current-position">
+          <directions 
+            draggable="true"
+            suppress-markers="true"
+            travel-mode="DRIVING"
+            origin={{originAddress}}
+            destination="{{destination}}">
+          </directions>
+        </ng-map>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary btn-lg btn-block" data-dismiss="modal" ng-click="saveRoute()">Guardar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL ROUTE BACK-->
+<div id="modalRouteBack" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Crear Recorrido de Vuelta</h4>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <label class="text-muted"><input type="checkbox" value="" ng-model="sameRoute" ng-init="sameRoute = true" ng-disabled="drawRouteBack"> Usa el mismo recorrido que el de ida.</label>
+        </div>
+        <div class="row">  
+          <label class="text-muted"><input type="checkbox" ng-model="drawRouteBack" ng-init="drawRouteBack = false" ng-disabled="sameRoute"> Comenzar a dibujar utilizando el recorrido de ida.</label>
+        </div>
+        <!-- PLACE AUTOCOMPLETE -->
+        <div ng-if="drawRouteBack">
+          <h4>Ingresar la dirección de origen</h4>
+          <input type="text" class="form-control" places-auto-complete size=80 ng-model="backOriginAddress"/>
+          <h4>Ingresar la dirección de destino</h4>
+          <input type="text" class="form-control" places-auto-complete size=80 ng-model="backDestinationAddress"/>
+          <!-- MAP -->
+          <ng-map id="mapRouteBack" center="current-position">
+            <directions 
+              draggable="true"
+              travel-mode="DRIVING"
+              suppress-markers="true"
+              ng-waypoints="{{waypointsRouteBack}}"
+              origin="{{backOriginAddress}}"
+              destination="{{backDestinationAddress}}">
+            </directions>
+          </ng-map>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <div ng-if="drawRouteBack">
+          <button type="button" class="btn btn-primary btn-lg btn-block" data-dismiss="modal" ng-click="saveRouteBack()" >Guardar</button>
+        </div>
+        <div ng-if="sameRoute">
+          <button type="button" class="btn btn-primary btn-lg btn-block" data-dismiss="modal" ng-click="saveSameRouteForToBack()">Guardar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

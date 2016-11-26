@@ -1,10 +1,18 @@
 'use strict';
 
 angular.module('webFrontendApp')
-  .controller('BusesCtrl', ['$scope', '$http', '$location', 'store', '$stateParams', 'growl', function($scope, $http, $location, store, $stateParams, growl) {
-  	$scope.bus = {internal: '', directionOfTravel: '', position: null};
+  .controller('BusesCtrl', ['$scope', '$http', '$location', 'store', '$stateParams', 'growl', 'NgMap', 'GeoCoder', function($scope, $http, $location, store, $stateParams, growl, NgMap, GeoCoder) {
+  	$scope.bus = {internal: '', directionOfTravel: '', position: null, routeWay: '', routeBack: ''};
   	$scope.buses = [];
     $scope.createMode = true;
+    $scope.routeWaySaved = false;
+    $scope.sameRoute = true;
+    $scope.drawRouteBack = false;
+
+    NgMap.getMap('addBus').then(function(map) {
+      console.log(map);
+    });
+
     $http.get('http://localhost:8080/backend/rest/busLines/' + $stateParams.busLineID)
     .then(function successCallback(response) {
       $scope.busLine = response.data;
@@ -86,4 +94,76 @@ angular.module('webFrontendApp')
       });
       ($scope.selection.length > 0) ? $scope.busesSelected = true : $scope.busesSelected = false;
     }, true);
+
+    $scope.originAddress = "";
+    $scope.destination = "";
+    $scope.backOriginAddress = "";
+    $scope.backDestinationAddress = "";
+    $scope.waypointsRouteBack = [];
+
+    $scope.notBusesSelected = function() {
+      return $scope.selection.length == 0;
+    }
+
+    $scope.saveRoute = function() {
+      NgMap.getMap('addBus').then(function(map) {
+        var coords = map.directionsRenderers[0].directions.routes[0].overview_path;
+        var position = {lat: coords[0].lat(), lng: coords[0].lng()};
+        $scope.busesSelectedAux = $scope.selection;
+        for (var i = 0; i < $scope.selection.length; i++) {
+          $scope.selection[i].routeWay = map.directionsRenderers[0].directions.routes[0].overview_polyline;
+          $scope.selection[i].position = position;
+          delete $scope.selection[i].selected;
+        }
+        updateBusesSelected();
+        $scope.waypointsRouteBack = map.directionsRenderers[0].directions.request.waypoints;
+        $scope.backOriginAddress = $scope.originAddress;
+        $scope.backDestinationAddress = $scope.destination;
+      });
+      $scope.routeWaySaved = true;
+    }
+
+    $scope.saveRouteBack = function() {
+      NgMap.getMap("mapRouteBack").then(function(map) {
+        $scope.busesSelectedAux = $scope.selection;
+        for (var i = 0; i < $scope.selection.length; i++) {
+          $scope.selection[i].routeBack = map.directionsRenderers[0].directions.routes[0].overview_polyline;
+          delete $scope.selection[i].selected;
+        }
+        updateBusesSelected();
+      });
+    }
+
+    $scope.saveSameRouteForToBack = function() {
+      for (var i = 0; i < $scope.selection.length; i++) {
+        $scope.selection[i].routeBack = $scope.selection[i].routeWay;
+      }
+    }
+
+    function updateBusesSelected() {
+      $http.put('http://localhost:8080/backend/rest/buses/updateList', $scope.selection)
+        .then(function() {
+          selectAll();
+        });
+    }
+
+    function selectAll() {
+      for (var i = 0; i < $scope.busesSelectedAux.length; i++) {
+        $scope.busesSelectedAux[i].selected = true;
+      }
+      $scope.selection = $scope.busesSelectedAux;
+    }
+
+    $scope.selectAllBuses = function() {
+      for (var i = 0; i < $scope.buses.length; i++) {
+        $scope.buses[i].selected = true;
+      }
+      $scope.selection = $scope.buses
+    }
+
+    $scope.deselectAllBuses = function() {
+      for (var i = 0; i < $scope.selection.length; i++) {
+        delete $scope.selection[i].selected;
+      }
+    }
   }]);
