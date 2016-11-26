@@ -9,10 +9,6 @@ angular.module('webFrontendApp')
     $scope.sameRoute = true;
     $scope.drawRouteBack = false;
 
-    NgMap.getMap('addBus').then(function(map) {
-      console.log(map);
-    });
-
     $http.get('http://localhost:8080/backend/rest/busLines/' + $stateParams.busLineID)
     .then(function successCallback(response) {
       $scope.busLine = response.data;
