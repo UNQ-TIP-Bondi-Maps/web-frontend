@@ -21,7 +21,7 @@ angular.module('webFrontendApp')
   	$scope.addBus = function() {
   		$http.post('http://localhost:8080/backend/rest/busLines/' + $stateParams.busLineID + '/addBus'  , $scope.bus)
   			.then(function successCallback(response) {
-         //growl.success("Colectivo agregado correctamente a la Línea " + $scope.busLine.line, {ttl: 5000});
+         growl.addSuccessMessage("Colectivo agregado correctamente", {ttl: 2000});
           updateBusesList();
   			}, function errorCallback(response) {
   				console.log("server error: " + response.data);
@@ -31,7 +31,7 @@ angular.module('webFrontendApp')
     $scope.deleteBus = function(bus) {
       $http.delete('http://localhost:8080/backend/rest/buses/delete/' +  bus.id)
         .then(function() {
-          //growl.success("Colectivo eliminado correctamente de la Línea " + $scope.busLine.line, {ttl: 5000});
+          growl.addSuccessMessage("Colectivo eliminado correctamente", {ttl: 2000});
           $scope.removeBus(bus);
         });
     };
@@ -39,7 +39,7 @@ angular.module('webFrontendApp')
     $scope.updateBus = function() {
       $http.put('http://localhost:8080/backend/rest/buses/update', $scope.bus)
         .then(function() {
-          //growl.success("Colectivo de la Línea " + $scope.busLine.line + " actualizado correctamente", {ttl: 5000});
+          growl.addSuccessMessage("Colectivo actualizado correctamente", {ttl: 2000});
           $scope.changeToCreateMode();
           updateBusesList();
         });
@@ -131,14 +131,18 @@ angular.module('webFrontendApp')
     }
 
     $scope.saveSameRouteForToBack = function() {
+      $scope.busesSelectedAux = $scope.selection;
       for (var i = 0; i < $scope.selection.length; i++) {
         $scope.selection[i].routeBack = $scope.selection[i].routeWay;
+        delete $scope.selection[i].selected;
       }
+      updateBusesSelected();
     }
 
     function updateBusesSelected() {
       $http.put('http://localhost:8080/backend/rest/buses/updateList', $scope.selection)
         .then(function() {
+          growl.addSuccessMessage("Ruta guardada correctamente", {ttl: 2000});
           selectAll();
         });
     }

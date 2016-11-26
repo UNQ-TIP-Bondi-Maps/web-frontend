@@ -13,31 +13,31 @@ angular.module('webFrontendApp')
   	$scope.addBusLine = function() {
   		$http.post('http://localhost:8080/backend/rest/companyManagers/' + store.get('id')  + '/addBusLine'  , $scope.busLine)
   			.then(function successCallback(response) {
-          //growl.success("Línea agregada correctamente.", {ttl: 5000});
           updateBusLinesList();
+          growl.addSuccessMessage("Línea creada correctamente", {ttl: 2000});
   			}, function errorCallback(response) {
-          //growl.error("Error al crear la Línea, intente nuevamente.", {ttl: 5000});
+          growl.addErrorMessage("Error al crear la Línea, intente nuevamente.", {ttl: 2000});
   			});
   	};
 
     $scope.deleteBusLine = function(busLine) {
       $http.delete('http://localhost:8080/backend/rest/busLines/delete/' +  busLine.id)
         .then(function successCallback() {
-          //growl.success("Línea eliminada correctamente.", {ttl: 5000});
+          growl.addSuccessMessage("Línea eliminada correctamente.", {ttl: 2000});
           $scope.removeBusLine(busLine);
         }, function errorCallback() {
-            //growl.error("Error al eliminar la Línea, intente nuevamente.", {ttl: 5000});
+            growl.addErrorMessage("Error al eliminar la Línea, intente nuevamente.", {ttl: 2000});
         });
     };
 
     $scope.updateBusLine = function() {
       $http.put('http://localhost:8080/backend/rest/busLines/update', $scope.busLine)
         .then(function successCallback() {
-          //growl.success("Línea actualizada correctamente.", {ttl: 5000});
+          growl.addSuccessMessage("Línea actualizada correctamente.", {ttl: 2000});
           $scope.changeToCreateMode();
           updateBusLinesList();
         }, function errorCallback() {
-            //growl.error("Error al actualizar la Línea, intente nuevamente.", {ttl: 5000});
+            growl.addErrorMessage("Error al actualizar la Línea, intente nuevamente.", {ttl: 2000});
         });
     };
 
