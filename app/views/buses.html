@@ -44,21 +44,24 @@
       <rd-widget-body classes="medium no-padding">
         <div class="table-responsive">
           <table class="table">
-            <tbody dir-paginate="bus in buses|itemsPerPage:1" pagination-id="buses">
+            <tbody dir-paginate="bus in buses|itemsPerPage:3" pagination-id="buses">
               <tr>
                 <td>Interno: {{bus.internal}}</td>
                 <td>
-                  <a ng-click="deleteBus(bus)" href="">
+                  <a ng-click="deleteBus(bus)" href="" title="Eliminar">
                     <span class="glyphicon glyphicon-trash"></span>
                   </a>
                 </td>
                 <td>
-                  <a href="" ng-click="changeToEditMode(bus)">
+                  <a href="" ng-click="changeToEditMode(bus)" title="Editar">
                     <span class="glyphicon glyphicon-edit"></span>
                   </a>
                 </td>
                 <td>
-                  <input type="checkbox" name="selectedBuses[]" value="{{bus}}" ng-model="bus.selected">
+                  <input type="checkbox" name="selectedBuses[]" value="{{bus}}" ng-model="bus.selected" title="Seleccionar">
+                </td>
+                <td>
+                  <button class="btn btn-primary btn-lg" title="Ver Recorrido" data-toggle="modal" data-target="#modalRooutes" ng-disabled="hasRoutesCreated(bus)" ng-click="loadRoutes(bus)">Ver Recorrido</button>         
                 </td>
               </tr>
             </tbody>
@@ -170,6 +173,43 @@
         <div ng-if="sameRoute">
           <button type="button" class="btn btn-primary btn-lg btn-block" data-dismiss="modal" ng-click="saveSameRouteForToBack()">Guardar</button>
         </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL ROUTES -->
+<div id="modalRooutes" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Recorridos</h4>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <i class="fa fa-square fa-route-way" aria-hidden="true"></i><span class="text-muted"> Recorrido de ida.</span>
+        </div>
+        <div class="row">
+          <i class="fa fa-square fa-route-back" aria-hidden="true"></i><span class="text-muted"> Recorrido de vuelta.</span>
+        </div>
+        <!-- MAP -->
+        <ng-map center="{{centerMap}}" zoom="10">
+          <shape name="polyline" id="polyline"
+            path="{{routeWayPath}}"
+            stroke-color="#195181"
+            stroke-opacity="1.0"
+            stroke-weight="5">
+          </shape>
+          <shape name="polyline" id="polyline"
+            path="{{routeBackPath}}"
+            stroke-color="#d22424"
+            stroke-opacity="1.0"
+            stroke-weight="2.8">
+          </shape>
+        </ng-map>
       </div>
     </div>
   </div>

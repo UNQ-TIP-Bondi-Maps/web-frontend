@@ -166,4 +166,32 @@ angular.module('webFrontendApp')
         delete $scope.selection[i].selected;
       }
     }
+
+    $scope.routeWayPath = [];
+    $scope.routeBackPath = [];
+    $scope.centerMap = [0,0];
+    $scope.hasRoutesCreated = function(bus) {
+      return bus.routeWay == null && bus.routeBack == null;
+    }
+
+    $scope.loadRoutes = function(bus) {
+      $scope.routeWayPath = pathForShape(google.maps.geometry.encoding.decodePath(bus.routeWay));
+      $scope.routeBackPath = pathForShape(google.maps.geometry.encoding.decodePath(bus.routeBack));
+      $scope.centerMap = getCenterMap($scope.routeWayPath, $scope.routeBackPath);
+    }
+
+    function getCenterMap(routeWayPath, routeBackPath) {
+      if(routeWayPath.length >= routeBackPath.length){
+        return [routeWayPath[routeWayPath.length/2][[0],[0]], routeWayPath[routeWayPath.length/2][[0],[1]]];
+      }
+      return [routeBackPath[routeBackPath.length/2][[0],[0]], routeBackPath[routeBackPath.length/2][[0],[1]]];
+    }
+
+    function pathForShape(coords) {
+      var result = [];
+      for (var i = 0; i < coords.length; i++) {
+        result[i] = [coords[i].lat(), coords[i].lng()];
+      }
+      return result;
+    }
   }]);

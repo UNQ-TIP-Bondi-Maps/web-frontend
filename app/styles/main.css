@@ -218,3 +218,19 @@ ng-map {
 .pac-container {
     z-index: 1051 !important;
 }
+
+.fa-map {
+  color: #337ab7;
+}
+
+.disabled {
+  cursor: not-allowed;
+}
+
+.fa-route-way {
+  color: #195181;
+}
+
+.fa-route-back {
+  color: #d22424;
+}
