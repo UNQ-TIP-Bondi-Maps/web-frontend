@@ -5,29 +5,29 @@
 <hr></hr>
 <div class="row">
   <div class="col-lg-6">
-    
-    <div class="form-group">
-      <label for="name" class="cols-sm-2 control-label">Línea</label>
-      <div class="cols-sm-10">
-        <div class="input-group">
-          <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
-          <input numbers-only class="form-control" name="name" id="name" ng-model="busLine.line"/>
+    <form name="addBusLine">
+      <div class="form-group">
+        <label for="name" class="cols-sm-2 control-label">Línea</label>
+        <div class="cols-sm-10">
+          <div class="input-group">
+            <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+            <input numbers-only class="form-control" name="name" id="name" ng-model="busLine.line" required/>
+          </div>
         </div>
       </div>
-    </div>
 
-    <div class="form-group">
-      <label for="name" class="cols-sm-2 control-label">Url de una Imagen</label>
-      <div class="cols-sm-10">
-        <div class="input-group">
-          <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
-          <input type="text" class="form-control" name="name" id="name" ng-model="busLine.imageUrl"/>
+      <div class="form-group">
+        <label for="name" class="cols-sm-2 control-label">Url de una Imagen</label>
+        <div class="cols-sm-10">
+          <div class="input-group">
+            <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+            <input type="text" class="form-control" name="name" id="name" ng-model="busLine.imageUrl" required/>
+          </div>
         </div>
       </div>
-    </div>
-
+    </form>
     <div class="form-group ">
-      <button type="button" class="btn btn-primary btn-lg btn-block login-button" ng-click="addBusLine()" ng-if="createMode">Agregar Línea</button>
+      <button type="button" class="btn btn-primary btn-lg btn-block login-button" ng-click="addBusLine()" ng-if="createMode" ng-disabled="addBusLine.$invalid">Agregar Línea</button>
     </div>
 
     <div class="form-group ">
