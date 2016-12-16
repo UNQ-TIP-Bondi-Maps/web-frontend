@@ -2,11 +2,17 @@
     <div growl></div>
 </body>
 <div class="row">
-  <div class="col-lg-6">
-    <h1 class="text-muted">Agregar Colectivos a la Línea {{busLine.line}}</h1>
-    <h4 class="text-muted">Luego de agregar los colectivos, deberá establecer sus recorridos.<br> Para ello, seleccione a los colectivos que desee agregarle su recorrido y presione "Crear".</h4>
+  <div class="col-title col-lg-6">
+    <h1 class="title-page text-center">Agregar Colectivos a la Línea <ins>{{busLine.line}}</ins></h1>
   </div>
 </div>
+<!--
+<div class="panel panel-default">
+  <div class="panel-body">
+    <h4 class="explication-text">Luego de agregar los colectivos, deberá establecer sus recorridos.<br> Para ello, seleccione a los colectivos que desee agregarle su recorrido y presione "Crear".</h4>
+  </div>
+</div>
+-->
 <hr></hr>
 <div class="row">
   <div class="col-lg-6">
@@ -42,7 +48,7 @@
     <rd-widget>
       <rd-widget-header icon="fa-tasks" title="Colectivos">
         <div class="right-align">
-          <label><input type="checkbox" id="allSelected" name="allSelected" ng-model="allSelected" data-ng-change="allSelected? selectAllBuses() : deselectAllBuses()"> Seleccionar Todos</label>
+          <label class="select-all"><input type="checkbox" id="allSelected" name="allSelected" ng-model="allSelected" data-ng-change="allSelected? selectAllBuses() : deselectAllBuses()"> Seleccionar Todos</label>
         </div>
       </rd-widget-header>
       <rd-widget-body classes="medium no-padding">
@@ -87,13 +93,13 @@
   <div class="col-xs-6 col-md-4">
     <div class="form-group ">
       <div class="thumbnail">
-        <h4 class="text-muted">Crear el recorrido de ida para los coletivos seleccionados</h4>
+        <h4 class="text-muted">Seleccione uno o más colectivos y cree el Recorrido de Ida.</h4>
         <button type="button" class="btn btn-primary btn-lg btn-block login-button" data-toggle="modal" data-target="#myModal" ng-disabled="!busesSelected" title="{{(notBusesSelected()?'Seleccione uno o más colectivos para crear el recorrido.' : '')}}" required>Crear</button>
       </div>
     </div>
     <div class="form-group ">
       <div class="thumbnail">
-        <h4 class="text-muted">Crear el recorrido de vuelta para los coletivos seleccionados</h4>
+        <h4 class="text-muted">Seleccione uno o más colectivos y cree el Recorrido de Vuelta.</h4>
         <button type="button" class="btn btn-primary btn-lg btn-block login-button" data-toggle="modal" data-target="#modalRouteBack" ng-disabled="!busesSelected || !routeWaySaved" title="{{(notBusesSelected()?'Seleccione uno o más colectivos para crear el recorrido.' : '')}}">Crear</button>
       </div>
     </div>
@@ -118,6 +124,7 @@
           <h4>Ingresar la dirección de destino</h4>
           <input type="text" class="form-control" places-auto-complete size=80 ng-model="destination" required/>
         </form>
+        <br>
         <!-- MAP -->
         <ng-map id="addBus" center="current-position" on-click="addMarker(event)">
           <directions 
@@ -200,14 +207,15 @@
       </div>
       <div class="modal-body">
         <div class="row">
-          <i class="fa fa-square fa-route-way" aria-hidden="true"></i><span class="text-muted"> Recorrido de ida.</span>
+          <i class="fa fa-square fa-route-way" aria-hidden="true"></i><span> Recorrido de ida.</span>
         </div>
         <div class="row">
-          <i class="fa fa-square fa-route-back" aria-hidden="true"></i><span class="text-muted"> Recorrido de vuelta.</span>
+          <i class="fa fa-square fa-route-back" aria-hidden="true"></i><span > Recorrido de vuelta.</span>
         </div>
         <div class="row">
-          <input type="checkbox" id="mycheckbox" name="mycheckbox" ng-model="myCheckbox" data-ng-change="myCheckbox ? displayBusStops() : hideBusStops()" /><span class="text-muted"> Ver Paradas.</span>
+          <input type="checkbox" id="mycheckbox" name="mycheckbox" ng-model="myCheckbox" data-ng-change="myCheckbox ? displayBusStops() : hideBusStops()" /><span> Seleccionar para ver las Paradas.</span>
         </div>
+        <br>
         <!-- MAP -->
         <ng-map center="{{centerMap}}" zoom="10">
           <shape name="polyline" id="polyline"

@@ -7,6 +7,7 @@
 
 body {
   padding: 0;
+  background-color: rgb(0, 173, 213);
 }
 
 /* Everything but the jumbotron gets side spacing for mobile first views */
@@ -233,4 +234,118 @@ ng-map {
 
 .fa-route-back {
   color: #d22424;
+}
+
+.col-title.col-lg-6 {
+    width: 100%;
+}
+
+.title-page {
+  font-family: 'Anton', sans-serif;
+  color: white;
+  font-size: 3vw !important;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: -3px;
+}
+
+.explication-text {
+  color: white;
+  font-family: 'Roboto', sans-serif;
+}
+
+.select-all {
+  color: #067a9c;
+}
+
+h1, .h1, h2, .h2, h3, .h3 {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.li {
+  font-family: 'Patua One', cursive;
+}
+
+.btn {
+  font-family: 'Patua One', cursive;
+}
+
+label {
+  font-family: 'Patua One', cursive;
+  color: white;
+}
+
+.panel-default {
+    border-color: white;
+}
+
+.panel {
+  background: transparent;
+  max-width: 50%;
+  margin-left:auto; 
+  margin-right:auto;
+}
+
+.navbar {
+  background-color: #2d3e63;
+  border-color: #2d3e63;
+}
+
+.navbar-default .navbar-nav > li > a {
+    color: white;
+}
+
+.navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus {
+    background-color: transparent;
+    color: #23D3FB;
+}
+
+ul.sidebar .sidebar-list a:hover {
+    color: #fff;
+    border-left: 3px solid #23D3FB;
+    text-indent: 22px;
+}
+
+ul.sidebar .sidebar-list a:focus {
+    color: #fff;
+    border-left: 3px solid #23D3FB;
+    text-indent: 22px;
+}
+
+#page-wrapper:not(.open) ul.sidebar .sidebar-list a:hover span {
+    border-left: 3px solid #23D3FB;
+    text-indent: 22px;
+}
+
+#page-wrapper:not(.open) ul.sidebar .sidebar-list a:focus span {
+    border-left: 3px solid #23D3FB;
+    text-indent: 22px;
+}
+
+.btn-primary {
+    color: #fff;
+    background-color: #067a9c;
+    border-color: transparent;
+}
+
+.btn-primary:hover {
+    color: #067a9c;
+    background-color: #23D3FB;
+    border-color: transparent;
+}
+
+.modal-content {
+  background-color: rgb(0, 173, 213);
+}
+
+.modal-header {
+  font-family: 'Roboto', sans-serif;
+  color: white;
+}
+
+.modal-body {
+  background-color: rgb(0, 173, 213);
+  font-family: 'Patua One', cursive;
+  color: white;
 }
