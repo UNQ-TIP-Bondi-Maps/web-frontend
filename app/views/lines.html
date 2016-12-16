@@ -5,13 +5,13 @@
 <hr></hr>
 <div class="row">
   <div class="col-lg-6">
-    <form name="addBusLine">
+    <form name="addBusLineForm">
       <div class="form-group">
         <label for="name" class="cols-sm-2 control-label">Línea</label>
         <div class="cols-sm-10">
           <div class="input-group">
             <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
-            <input numbers-only class="form-control" name="name" id="name" ng-model="busLine.line" required/>
+            <input numbers-only class="form-control" name="busLineNumber" id="busLineNumber" ng-model="busLine.line" required/>
           </div>
         </div>
       </div>
@@ -21,17 +21,17 @@
         <div class="cols-sm-10">
           <div class="input-group">
             <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
-            <input type="text" class="form-control" name="name" id="name" ng-model="busLine.imageUrl" required/>
+            <input type="text" class="form-control" name="busLineImageUrl" id="busLineImageUrl" ng-model="busLine.imageUrl" required/>
           </div>
         </div>
       </div>
     </form>
     <div class="form-group ">
-      <button type="button" class="btn btn-primary btn-lg btn-block login-button" ng-click="addBusLine()" ng-if="createMode" ng-disabled="addBusLine.$invalid">Agregar Línea</button>
+      <button type="button" class="btn btn-primary btn-lg btn-block login-button" ng-click="addBusLine()" ng-if="createMode" ng-disabled="addBusLineForm.$invalid">Agregar Línea</button>
     </div>
 
     <div class="form-group ">
-      <button type="button" class="btn btn-primary btn-lg btn-block login-button" ng-click="updateBusLine()" ng-if="editMode">Guardar Cambios</button>
+      <button type="button" class="btn btn-primary btn-lg btn-block login-button" ng-click="updateBusLine()" ng-if="editMode" ng-disabled="addBusLineForm.$invalid">Guardar Cambios</button>
     </div>
 
     <rd-widget>
@@ -39,16 +39,16 @@
       <rd-widget-body classes="medium no-padding">
         <div class="table-responsive">
           <table class="table">
-            <tbody dir-paginate="busLine in busLines|itemsPerPage:1" pagination-id="lines">
+            <tbody dir-paginate="busLine in busLines|itemsPerPage:3" pagination-id="lines">
               <tr>
                 <td>Línea: {{busLine.line}}</td>
                 <td>
-                  <a ng-click="deleteBusLine(busLine)" href="">
+                  <a ng-click="deleteBusLine(busLine)" href="" title="Eliminar">
                     <span class="glyphicon glyphicon-trash"></span>
                   </a>
                 </td>
                 <td>
-                  <a href="" ng-click="changeToEditMode(busLine)">
+                  <a href="" ng-click="changeToEditMode(busLine)" title="Editar">
                     <span class="glyphicon glyphicon-edit"></span>
                   </a>
                 </td>

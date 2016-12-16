@@ -26,10 +26,6 @@
             templateUrl: 'views/login.html',
             controller: 'LoginCtrl'
         })
-        .state('dashboard', {
-            url: '/dashboard',
-            templateUrl: 'views/templates/dashboard.html'
-        })
         .state('lines', {
             url: '/lines',
             templateUrl: 'views/lines.html',
@@ -44,10 +40,6 @@
             url: '/monitoring-buses',
             templateUrl: 'views/monitoring-buses.html',
             controller: 'MonitoringBusesCtrl'
-        })
-        .state('tables', {
-            url: '/tables',
-            templateUrl: 'views/templates/tables.html'
         });
   });
 
