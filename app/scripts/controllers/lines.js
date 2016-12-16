@@ -16,7 +16,8 @@ angular.module('webFrontendApp')
           updateBusLinesList();
           growl.addSuccessMessage("Línea creada correctamente", {ttl: 2000});
   			}, function errorCallback(response) {
-          growl.addErrorMessage("Error al crear la Línea, intente nuevamente.", {ttl: 2000});
+          if(response.status == 400)
+            growl.addErrorMessage("El número de la Línea debe ser único, intente con otro número.", {ttl: 2000});
   			});
   	};
 
@@ -36,8 +37,9 @@ angular.module('webFrontendApp')
           growl.addSuccessMessage("Línea actualizada correctamente.", {ttl: 2000});
           $scope.changeToCreateMode();
           updateBusLinesList();
-        }, function errorCallback() {
-            growl.addErrorMessage("Error al actualizar la Línea, intente nuevamente.", {ttl: 2000});
+        }, function errorCallback(response) {
+            if(response.status == 400)
+              growl.addErrorMessage("El número de la Línea debe ser único, intente con otro número.", {ttl: 2000});
         });
     };
 
