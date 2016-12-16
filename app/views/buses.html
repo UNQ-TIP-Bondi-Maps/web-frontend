@@ -108,12 +108,14 @@
       </div>
       <div class="modal-body">
         <!-- PLACE AUTOCOMPLETE -->
-        <h4>Ingresar la dirección de origen</h4>
-        <input type="text" class="form-control" places-auto-complete size=80 ng-model="originAddress"/>
-        <h4>Ingresar la dirección de destino</h4>
-        <input type="text" class="form-control" places-auto-complete size=80 ng-model="destination"/>
+        <form name="createdRouteWayForm">
+          <h4>Ingresar la dirección de origen</h4>
+          <input type="text" class="form-control" places-auto-complete size=80 ng-model="originAddress" required/>
+          <h4>Ingresar la dirección de destino</h4>
+          <input type="text" class="form-control" places-auto-complete size=80 ng-model="destination" required/>
+        </form>
         <!-- MAP -->
-        <ng-map id="addBus" center="current-position">
+        <ng-map id="addBus" center="current-position" on-click="addMarker(event)">
           <directions 
             draggable="true"
             suppress-markers="true"
@@ -121,10 +123,11 @@
             origin={{originAddress}}
             destination="{{destination}}">
           </directions>
+          <marker ng-repeat="busStop in busStops" position="{{busStop}}" draggable="true"></marker>
         </ng-map>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-primary btn-lg btn-block" data-dismiss="modal" ng-click="saveRoute()">Guardar</button>
+        <button type="button" class="btn btn-primary btn-lg btn-block" data-dismiss="modal" ng-click="saveRoute()" title="Cree el recorrido y agregue las paradas antes de guardar." ng-disabled="createdRouteWayForm.$invalid || busStops == 0">Guardar</button>
       </div>
     </div>
   </div>
@@ -149,26 +152,29 @@
         </div>
         <!-- PLACE AUTOCOMPLETE -->
         <div ng-if="drawRouteBack">
-          <h4>Ingresar la dirección de origen</h4>
-          <input type="text" class="form-control" places-auto-complete size=80 ng-model="backOriginAddress"/>
-          <h4>Ingresar la dirección de destino</h4>
-          <input type="text" class="form-control" places-auto-complete size=80 ng-model="backDestinationAddress"/>
-          <!-- MAP -->
-          <ng-map id="mapRouteBack" center="current-position">
-            <directions 
-              draggable="true"
-              travel-mode="DRIVING"
-              suppress-markers="true"
-              ng-waypoints="{{waypointsRouteBack}}"
-              origin="{{backOriginAddress}}"
-              destination="{{backDestinationAddress}}">
-            </directions>
-          </ng-map>
+          <form name="createdRouteBackForm">
+            <h4>Ingresar la dirección de origen</h4>
+            <input type="text" class="form-control" places-auto-complete size=80 ng-model="backOriginAddress"/>
+            <h4>Ingresar la dirección de destino</h4>
+            <input type="text" class="form-control" places-auto-complete size=80 ng-model="backDestinationAddress"/>
+            <!-- MAP -->
+            <ng-map id="mapRouteBack" center="current-position" on-click="addMarker(event)">
+              <directions 
+                draggable="true"
+                travel-mode="DRIVING"
+                suppress-markers="true"
+                ng-waypoints="{{waypointsRouteBack}}"
+                origin="{{backOriginAddress}}"
+                destination="{{backDestinationAddress}}">
+              </directions>
+              <marker ng-repeat="busStop in busStops" position="{{busStop}}" draggable="true"></marker>
+            </ng-map>
+          </form>
         </div>
       </div>
       <div class="modal-footer">
         <div ng-if="drawRouteBack">
-          <button type="button" class="btn btn-primary btn-lg btn-block" data-dismiss="modal" ng-click="saveRouteBack()" >Guardar</button>
+          <button type="button" class="btn btn-primary btn-lg btn-block" data-dismiss="modal" ng-click="saveRouteBack()" ng-disabled="createdRouteBackForm.$invalid || busStops == 0">Guardar</button>
         </div>
         <div ng-if="sameRoute">
           <button type="button" class="btn btn-primary btn-lg btn-block" data-dismiss="modal" ng-click="saveSameRouteForToBack()">Guardar</button>
@@ -195,6 +201,9 @@
         <div class="row">
           <i class="fa fa-square fa-route-back" aria-hidden="true"></i><span class="text-muted"> Recorrido de vuelta.</span>
         </div>
+        <div class="row">
+          <input type="checkbox" id="mycheckbox" name="mycheckbox" ng-model="myCheckbox" data-ng-change="myCheckbox ? displayBusStops() : hideBusStops()" /><span class="text-muted"> Ver Paradas.</span>
+        </div>
         <!-- MAP -->
         <ng-map center="{{centerMap}}" zoom="10">
           <shape name="polyline" id="polyline"
@@ -209,6 +218,7 @@
             stroke-opacity="1.0"
             stroke-weight="2.8">
           </shape>
+          <marker ng-repeat="busStop in busStopsAux" position="{{busStop.lat}}, {{busStop.lng}}"></marker>
         </ng-map>
       </div>
     </div>

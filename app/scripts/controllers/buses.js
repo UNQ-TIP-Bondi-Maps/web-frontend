@@ -2,7 +2,7 @@
 
 angular.module('webFrontendApp')
   .controller('BusesCtrl', ['$scope', '$http', '$location', 'store', '$stateParams', 'growl', 'NgMap', 'GeoCoder', function($scope, $http, $location, store, $stateParams, growl, NgMap, GeoCoder) {
-  	$scope.bus = {internal: '', directionOfTravel: '', position: null, routeWay: '', routeBack: ''};
+  	$scope.bus = {internal: '', directionOfTravel: '', position: null, routeWay: '', routeBack: '', busStopsWay: [], busStopsBack: []};
   	$scope.buses = [];
     $scope.createMode = true;
     $scope.routeWaySaved = false;
@@ -103,12 +103,14 @@ angular.module('webFrontendApp')
 
     $scope.saveRoute = function() {
       NgMap.getMap('addBus').then(function(map) {
+        $scope.realBusStopsWay = markersToPositions(map.markers);
         var coords = map.directionsRenderers[0].directions.routes[0].overview_path;
         var position = {lat: coords[0].lat(), lng: coords[0].lng()};
         $scope.busesSelectedAux = $scope.selection;
         for (var i = 0; i < $scope.selection.length; i++) {
           $scope.selection[i].routeWay = map.directionsRenderers[0].directions.routes[0].overview_polyline;
           $scope.selection[i].position = position;
+          $scope.selection[i].busStopsWay = $scope.realBusStopsWay;
           delete $scope.selection[i].selected;
         }
         updateBusesSelected();
@@ -116,14 +118,17 @@ angular.module('webFrontendApp')
         $scope.backOriginAddress = $scope.originAddress;
         $scope.backDestinationAddress = $scope.destination;
       });
+
       $scope.routeWaySaved = true;
     }
 
     $scope.saveRouteBack = function() {
       NgMap.getMap("mapRouteBack").then(function(map) {
+        $scope.realBusStopsBack = markersToPositions(map.markers);
         $scope.busesSelectedAux = $scope.selection;
         for (var i = 0; i < $scope.selection.length; i++) {
           $scope.selection[i].routeBack = map.directionsRenderers[0].directions.routes[0].overview_polyline;
+          $scope.selection[i].busStopsBack = $scope.realBusStopsBack;
           delete $scope.selection[i].selected;
         }
         updateBusesSelected();
@@ -144,6 +149,7 @@ angular.module('webFrontendApp')
         .then(function() {
           growl.addSuccessMessage("Ruta guardada correctamente", {ttl: 2000});
           selectAll();
+          $scope.busStops = [];
         });
     }
 
@@ -178,7 +184,18 @@ angular.module('webFrontendApp')
       $scope.routeWayPath = pathForShape(google.maps.geometry.encoding.decodePath(bus.routeWay));
       $scope.routeBackPath = pathForShape(google.maps.geometry.encoding.decodePath(bus.routeBack));
       $scope.centerMap = getCenterMap($scope.routeWayPath, $scope.routeBackPath);
+      $scope.busStopsOfBusSelected = bus.busStopsWay;
+      $scope.busStopsOfBusSelected = $scope.busStopsOfBusSelected.concat(bus.busStopsBack)
+      $scope.busStopsAux = [];
     }
+
+    $scope.displayBusStops = function() {
+        $scope.busStopsAux = $scope.busStopsOfBusSelected;
+    };
+
+    $scope.hideBusStops = function() {
+        $scope.busStopsAux = [];
+    };
 
     function getCenterMap(routeWayPath, routeBackPath) {
       if(routeWayPath.length >= routeBackPath.length){
@@ -193,5 +210,18 @@ angular.module('webFrontendApp')
         result[i] = [coords[i].lat(), coords[i].lng()];
       }
       return result;
+    }
+
+    $scope.busStops = [];
+    $scope.addMarker = function(event) {
+      $scope.busStops.push([event.latLng.lat(), event.latLng.lng()]);
+    }
+
+    function markersToPositions(markers) {
+      var positions = [];
+      for (var key in markers) {
+        positions.push({lat: markers[key].position.lat(), lng: markers[key].position.lng()})
+      }
+      return positions;
     }
   }]);
