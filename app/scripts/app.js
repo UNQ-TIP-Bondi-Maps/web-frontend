@@ -8,7 +8,7 @@
  *
  * Main module of the application.
  */
- var app = angular.module('webFrontendApp', ['angular-growl', 'angular-storage', 'ui.bootstrap', 'ui.router', 'ngCookies', 'ngAnimate', 'ngResource', 'ngSanitize', 'ngTouch', 'ngMap', 'angularScreenfull', 'angularUtils.directives.dirPagination', 'btorfs.multiselect']);
+ var app = angular.module('webFrontendApp', ['angular-growl', 'angular-storage', 'ui.bootstrap', 'ui.router', 'ngCookies', 'ngAnimate', 'ngResource', 'ngSanitize', 'ngTouch', 'ngMap', 'angularScreenfull', 'angularUtils.directives.dirPagination', 'btorfs.multiselect', 'angularjs-dropdown-multiselect']);
 
   app.config(function ($stateProvider, $urlRouterProvider) { 
     // For unmatched routes

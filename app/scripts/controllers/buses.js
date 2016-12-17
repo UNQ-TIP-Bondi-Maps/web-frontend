@@ -199,9 +199,9 @@ angular.module('webFrontendApp')
 
     function getCenterMap(routeWayPath, routeBackPath) {
       if(routeWayPath.length >= routeBackPath.length){
-        return [routeWayPath[routeWayPath.length/2][[0],[0]], routeWayPath[routeWayPath.length/2][[0],[1]]];
+        return [routeWayPath[Math.round(routeWayPath.length/2)][[0],[0]], routeWayPath[Math.round(routeWayPath.length/2)][[0],[1]]];
       }
-      return [routeBackPath[routeBackPath.length/2][[0],[0]], routeBackPath[routeBackPath.length/2][[0],[1]]];
+      return [routeBackPath[Math.round(routeBackPath.length/2)][[0],[0]], routeBackPath[Math.round(routeBackPath.length/2)][[0],[1]]];
     }
 
     function pathForShape(coords) {

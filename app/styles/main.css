@@ -424,3 +424,41 @@ button.btn.btn-secondary {
 button.btn.btn-secondary:hover {
     background-color: #23D3FB;
 }
+
+div#map-container.full-screen {
+    top: 50px;
+}
+
+.label-monitoring {
+  color: #2d3e63;
+}
+
+button.dropdown-toggle.ng-binding.btn.btn-default {
+    background-color: #2d3e63;
+    border-color: #2d3e63;
+    color: white;
+}
+
+ul.dropdown-menu.dropdown-menu-form {
+  background-color: #2d3e63;
+}
+
+span.glyphicon.glyphicon-ok {
+    color: white;
+}
+
+span.glyphicon.glyphicon-remove {
+    color: white;
+}
+
+.dropdown-menu > li > a:hover, .dropdown-menu > li > a:focus {
+    color: white;
+    text-decoration: none;
+    background-color: #23D3FB;
+}
+
+.dropdown-menu > li > a {
+    color: white;
+    text-decoration: none;
+    background-color: transparent;
+}
