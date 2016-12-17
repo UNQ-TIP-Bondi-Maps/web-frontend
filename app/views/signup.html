@@ -6,14 +6,15 @@
 			<hr>
 			<h3 class="signup-text-page text-center">Registre su Empresa. Agregue sus Líneas, Colectivos y <h2 class="text-center signup-text-page text-uppercase">¡Monitorealos!</small></h2>
 		</div>
+
 		<div class="col-xs-6 col-md-4 main-login main-center">
-			<form class="form-horizontal" method="post" action="#">
+			<form name="signupForm" class="form-horizontal" method="post" action="#">
 				<div class="form-group">
 					<label for="name" class="cols-sm-2 control-label">Nombre y Apellido</label>
 					<div class="cols-sm-10">
 						<div class="input-group">
 							<span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
-							<input type="text" class="form-control" name="name" id="name" ng-model="companyManager.nameAndSurname" required/>
+							<input type="text" class="form-control name" name="name" id="name" ng-model="companyManager.nameAndSurname" required autofocus/>
 						</div>
 					</div>
 				</div>
@@ -23,7 +24,7 @@
 					<div class="cols-sm-10">
 						<div class="input-group">
 							<span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
-							<input type="text" class="form-control" name="email" id="email" ng-model="companyManager.email" required/>
+							<input type="email" class="form-control email" name="email" id="email" ng-model="companyManager.email" required/>
 						</div>
 					</div>
 				</div>
@@ -33,7 +34,7 @@
 					<div class="cols-sm-10">
 						<div class="input-group">
 							<span class="input-group-addon"><i class="fa fa-phone aria-hidden="true"></i></span>
-							<input numbers-only class="form-control" name="phone" id="phone" ng-model="companyManager.phone" required/>
+							<input numbers-only class="form-control phone" name="phone" id="phone" ng-model="companyManager.phone" required/>
 						</div>
 					</div>
 				</div>
@@ -43,7 +44,7 @@
 					<div class="cols-sm-10">
 						<div class="input-group">
 							<span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
-							<input type="text" class="form-control" name="name" id="companyName" ng-model="companyManager.company.name" required/>
+							<input type="text" class="form-control company" name="name" id="companyName" ng-model="companyManager.company.name" required/>
 						</div>
 					</div>
 				</div>
@@ -53,7 +54,7 @@
 					<div class="cols-sm-10">
 						<div class="input-group">
 							<span class="input-group-addon"><i class="fa fa-users fa" aria-hidden="true"></i></span>
-							<input type="text" class="form-control" name="username" id="username" ng-model="companyManager.userName" required/>
+							<input type="text" class="form-control username" name="username" id="username" ng-model="companyManager.userName" required/>
 						</div>
 					</div>
 				</div>
@@ -63,13 +64,13 @@
 					<div class="cols-sm-10">
 						<div class="input-group">
 							<span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
-							<input type="password" class="form-control" name="password" id="password" ng-model="companyManager.password" required/>
+							<input type="password" class="form-control password" name="password" id="password" ng-model="companyManager.password" required/>
 						</div>
 					</div>
 				</div>
-
+				</form>
 				<div class="form-group ">
-					<button type="button" class="btn btn-primary btn-lg btn-block login-button" ng-click="createCompanyManager()">Registrarse</button>
+					<button type="button" class="btn btn-primary btn-lg btn-block login-button" ng-click="createCompanyManager()" ng-disabled="signupForm.$invalid">Registrarse</button>
 				</div>
 				<div class="login-register">
 		            <a href="#/login">Ingresar</a>

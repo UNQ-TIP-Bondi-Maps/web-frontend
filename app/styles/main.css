@@ -388,3 +388,31 @@ ul.sidebar .sidebar-list a:focus {
     color: white;
     background-color: #30426a;
 }
+
+.ng-valid {
+    border-color: lightgreen;
+}
+
+.email.ng-dirty.ng-invalid-email {
+    border-color: red;
+}
+
+.name.ng-dirty.ng-invalid-required {
+    border-color: red;
+}
+
+.phone.ng-dirty.ng-invalid-required {
+    border-color: red;
+}
+
+.company.ng-dirty.ng-invalid-required {
+    border-color: red;
+}
+
+.username.ng-dirty.ng-invalid-required {
+    border-color: red;
+}
+
+.password.ng-dirty.ng-invalid-required {
+    border-color: red;
+}
