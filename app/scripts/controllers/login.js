@@ -5,14 +5,22 @@ angular.module('webFrontendApp')
   	$scope.errorLogin = false;
   	$scope.userName = '';
   	$scope.password = '';
+    $scope.loginProblem = false;
+    $scope.serverError = false;
+
     $scope.login = function() {
-      $scope.errorLogin = false;
+      $scope.loginProblem = false;
+      $scope.serverError = false;
       $http.get('http://localhost:8080/backend/rest/companyManagers/login/' + $scope.userName + '/' + $scope.password)
         .then(function successCallback(response) {
           store.set('id', response.data);
           $location.path('/lines');
         }, function errorCallback(response) {
-          $scope.errorLogin = true;
+          if(response.status == 400) {
+            $scope.loginProblem = true;
+          } else {
+            $scope.serverError = true;
+          }
         });
     };
   }]);

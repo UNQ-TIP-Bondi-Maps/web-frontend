@@ -5,6 +5,8 @@
 		<div class="panel-heading">
         </div> 
 		<div class="main-login main-center">
+			<span ng-if="loginProblem" class="text-danger text-center">Usuario o contraseña incorrecta.</span>
+			<span ng-if="serverError" class="text-danger text-center">Actualmente estamos con problemas, intente mas tarde.</span>
 			<form name="loginForm" class="form-horizontal" method="post" action="#">
 				<div class="form-group">
 					<label for="username" class="cols-sm-2 control-label">Nombre de Usuario</label>
