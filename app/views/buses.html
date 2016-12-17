@@ -122,8 +122,9 @@
           <input type="text" class="form-control" places-auto-complete size=80 ng-model="originAddress" required/>
           <h4>Ingresar la dirección de destino</h4>
           <input type="text" class="form-control" places-auto-complete size=80 ng-model="destination" required/>
+          <h4>Antes de guardar el recorrido es necesario agregar las paradas del Colectivo, hágalo haciendo click en un area vacía del mapa y mueva el marcador a la posición deseada.</h4>
         </form>
-        <br>
+        <br><br>
         <!-- MAP -->
         <ng-map id="addBus" center="current-position" on-click="addMarker(event)">
           <directions 
@@ -167,6 +168,8 @@
             <input type="text" class="form-control" places-auto-complete size=80 ng-model="backOriginAddress"/>
             <h4>Ingresar la dirección de destino</h4>
             <input type="text" class="form-control" places-auto-complete size=80 ng-model="backDestinationAddress"/>
+            <h4>Antes de guardar el recorrido es necesario agregar las paradas del Colectivo, hágalo haciendo click en un area vacía del mapa y mueva el marcador a la posición deseada.</h4>
+            <br>
             <!-- MAP -->
             <ng-map id="mapRouteBack" center="current-position" on-click="addMarker(event)">
               <directions 
