@@ -416,3 +416,11 @@ ul.sidebar .sidebar-list a:focus {
 .password.ng-dirty.ng-invalid-required {
     border-color: red;
 }
+
+button.btn.btn-secondary {
+    background-color: #067a9c;
+}
+
+button.btn.btn-secondary:hover {
+    background-color: #23D3FB;
+}

@@ -16,6 +16,11 @@ angular.module('webFrontendApp')
   			});
   	};
     $scope.checkIfExistsUserName = function() {
+      if(angular.isUndefined($scope.companyManager.userName)) {
+        $scope.notExistsUserName = false;
+        $scope.existsUserName = false;
+        return;
+      }
       $scope.notExistsUserName = false;
       $scope.existsUserName = false;
       $scope.startCeckIfExistsUserName = true;

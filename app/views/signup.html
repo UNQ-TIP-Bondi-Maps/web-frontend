@@ -54,8 +54,10 @@
 					<div class="cols-sm-10">
 						<div class="input-group">
 							<span class="input-group-addon"><i class="fa fa-users fa" aria-hidden="true"></i></span>
-							<input type="text" class="form-control username" name="username" id="username" ng-model="companyManager.userName" required/>
+							<input type="text" class="form-control username" name="username" id="username" ng-model="companyManager.userName" ng-blur="checkIfExistsUserName()" required/>
 						</div>
+						<span ng-if="notExistsUserName" class="text-success">Usuario Disponible.</span>
+						<span ng-if="existsUserName" class="text-danger">Usuario no disponible.</span>
 					</div>
 				</div>
 
@@ -70,7 +72,7 @@
 				</div>
 				</form>
 				<div class="form-group ">
-					<button type="button" class="btn btn-primary btn-lg btn-block login-button" ng-click="createCompanyManager()" ng-disabled="signupForm.$invalid">Registrarse</button>
+					<button type="button" class="btn btn-primary btn-lg btn-block login-button" ng-click="createCompanyManager()" ng-disabled="signupForm.$invalid || existsUserName">Registrarse</button>
 				</div>
 				<div class="login-register">
 		            <a href="#/login">Ingresar</a>
