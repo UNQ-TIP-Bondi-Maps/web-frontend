@@ -349,3 +349,42 @@ ul.sidebar .sidebar-list a:focus {
   font-family: 'Patua One', cursive;
   color: white;
 }
+
+.control-label {
+  color: #067a9c;
+}
+
+.title-home {
+  font-family: 'Anton', sans-serif;
+  color: white;
+  font-size: 7vw !important;
+  font-weight: bold;
+  letter-spacing: -3px;
+}
+
+.maps-text {
+  font-family: 'Open Sans', sans-serif;
+  color: white;
+  font-size: 4vw !important;
+  letter-spacing: -3px;
+}
+
+.signup-text-page {
+  font-family: 'Dosis', sans-serif;
+  color: #005973;
+}
+
+#content-wrapper {
+    background-image: url(../images/lines-bk.png);
+}
+
+.text-monitoring {
+  font-size: 7vw !important;
+  font-weight: bold;
+}
+
+.input-group-addon {
+    border: transparent;
+    color: white;
+    background-color: #30426a;
+}

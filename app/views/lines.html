@@ -7,21 +7,21 @@
   </div>
 </div>
 <hr></hr>
+<br><br>
 <div class="row centered-form center-block">
 <div class="row">
-  <div class="col-lg-6">
+  <div class="col-lg-5">
     <form name="addBusLineForm">
       <div class="form-group">
-        <label for="name" class="cols-sm-2 control-label">Línea</label>
         <div class="cols-sm-10">
           <div class="input-group">
-            <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+            <span class="input-group-addon"><i class="" aria-hidden="true">Línea</i></span>
             <input numbers-only class="form-control" name="busLineNumber" id="busLineNumber" ng-model="busLine.line" required/>
           </div>
         </div>
       </div>
 
-      <div class="form-group">
+      <!--<div class="form-group">
         <label for="name" class="cols-sm-2 control-label">Url de una Imagen</label>
         <div class="cols-sm-10">
           <div class="input-group">
@@ -29,7 +29,7 @@
             <input type="text" class="form-control" name="busLineImageUrl" id="busLineImageUrl" ng-model="busLine.imageUrl" required/>
           </div>
         </div>
-      </div>
+      </div>-->
     </form>
     <div class="form-group ">
       <button type="button" class="btn btn-primary btn-lg btn-block login-button" ng-click="addBusLine()" ng-if="createMode" ng-disabled="addBusLineForm.$invalid">Agregar Línea</button>
@@ -38,7 +38,9 @@
     <div class="form-group ">
       <button type="button" class="btn btn-primary btn-lg btn-block login-button" ng-click="updateBusLine()" ng-if="editMode" ng-disabled="addBusLineForm.$invalid">Guardar Cambios</button>
     </div>
+    </div>
 
+    <div class="col-lg-6">
     <rd-widget>
       <rd-widget-header icon="fa-tasks" title="Líneas"></rd-widget-header>
       <rd-widget-body classes="medium no-padding">

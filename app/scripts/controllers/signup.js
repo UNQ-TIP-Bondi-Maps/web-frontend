@@ -10,7 +10,7 @@ angular.module('webFrontendApp')
   		$http.post('http://localhost:8080/backend/rest/companyManagers/create', $scope.companyManager)
   			.then(function successCallback(response) {
   				store.set('id', response.data.id);
-  				$location.path('/dashboard');
+  				$location.path('/lines');
   			}, function errorCallback(response) {
   				console.log("server error: " + response.data);
   			});
